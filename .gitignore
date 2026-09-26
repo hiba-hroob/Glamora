@@ -1,0 +1,22 @@
+.vs/
+bin/
+obj/
+*.user
+*.suo
+
+# User-specific files
+*.csproj.user
+
+# Build results
+[Dd]ebug/
+[Rr]elease/
+
+# Visual Studio
+.vscode/
+
+# Rider
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db

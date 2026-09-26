@@ -1,0 +1,131 @@
+﻿@{
+    var orderDetails = ViewBag.OrderDetails as List<Webproject.Models.OrderDetail>;
+    var total = ViewBag.Total;
+}
+
+<style>
+    body {
+        background: #fff0f6;
+    }
+
+    .success-card {
+        max-width: 700px;
+        margin: auto;
+        margin-top: 50px;
+        background: white;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(214, 51, 132, 0.2);
+        padding: 30px;
+    }
+
+    h2 {
+        color: #b83b5e;
+        font-weight: bold;
+    }
+
+    .product {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        padding: 10px 0;
+        border-bottom: 1px solid #eee;
+    }
+
+        .product img {
+            width: 70px;
+            height: 70px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+    .price {
+        color: #b83b5e;
+        font-weight: bold;
+    }
+
+    .total-box {
+        margin-top: 20px;
+        padding: 15px;
+        background: #ffe3ee;
+        border-radius: 10px;
+        font-size: 20px;
+        font-weight: bold;
+        color: #b83b5e;
+        text-align: center;
+    }
+
+    .btn-pink {
+        background-color: #b83b5e;
+        color: white;
+        border: none;
+        padding: 10px;
+        width: 100%;
+        border-radius: 10px;
+        margin-top: 15px;
+        font-size: 16px;
+    }
+
+        .btn-pink:hover {
+            background-color: #f48fb1;
+            color: #b83b5e;
+        }
+</style>
+
+<div class="success-card">
+    <h2>Order Confirmed Successfully</h2>
+    <hr />
+
+    <h4>🛍️ Products:</h4>
+
+    
+    @if (orderDetails != null && orderDetails.Any())
+    {
+        @foreach (var item in orderDetails)
+        {
+            <div class="product">
+
+                <img src="@item.Product.ImageUrl"
+                     alt="@item.Product.Name" />
+
+                <div>
+                    <div>
+                        <b>@item.Product.Name</b>
+                    </div>
+
+                    <div>
+                        Quantity: @item.Quantity
+                    </div>
+
+                    <div class="price">
+                        $@item.Price × @item.Quantity =
+                        $@(item.Price * item.Quantity)
+                    </div>
+                </div>
+
+            </div>
+        }
+    }
+    else
+    {
+        <p>No products were found in this order.</p>
+    }
+
+    <div class="total-box">
+        Total Price: $@total
+    </div>
+
+    <a asp-controller="Products"
+       asp-action="Index"
+       class="btn-pink" style="text-decoration:none;">
+         Back to Products
+    </a>
+
+    <a asp-controller="Orders"
+       asp-action="MyOrders"
+       class="btn-pink" style="text-decoration:none; margin-left:10px;" >
+         View My Orders
+    </a>
+    
+
+</div>
+

@@ -1,0 +1,109 @@
+﻿ @model List<Webproject.Models.Order>
+
+    <style>
+        body {
+            background: #fff0f6;
+            font-family: Arial;
+        }
+
+        .container {
+            margin: auto;
+            margin-top: 40px;
+        }
+
+        .title {
+            text-align: center;
+            color: #b83b5e;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .order-card {
+            background: white;
+            padding: 18px;
+            margin-bottom: 15px;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(214, 51, 132, 0.15);
+            transition: 0.3s;
+        }
+
+            .order-card:hover {
+                background-color: lightpink;
+            }
+
+        .order-id {
+            font-weight: bold;
+            color: black;
+        }
+
+        .total {
+            color: #b83b5e;
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 5px;
+        }
+
+        .btn-details {
+            display: inline-block;
+            margin-top: 10px;
+            background: #b83b5e;
+            color: white;
+            padding: 8px 14px;
+            border-radius: 10px;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+            .btn-details:hover {
+                background-color: white;
+                color: #b83b5e
+            }
+    </style>
+
+    <div class="container">
+
+        <h2 class="title">🧾 My Orders</h2>
+
+        @foreach (var order in Model)
+    {
+        <div class="order-card">
+
+            <div class="order-id">Order #@order.Id</div>
+
+            <div class="total">
+                Total: $@order.TotalPrice
+            </div>
+
+            <a asp-action="Details" asp-route-id="@order.Id" class="btn-details">
+                Details
+            </a>
+
+            <a asp-controller="Products"
+               asp-action="Index"
+               class="btn-details">
+                back
+            </a>
+
+            <form asp-controller="Orders"
+                  asp-action="DeleteOrder"
+                  asp-route-id="@order.Id"
+                  method="post"
+                  style="display:inline;">
+
+                <button type="submit" class="btn-details">
+                    Delete
+                </button>
+
+            </form>
+
+
+
+        </div>
+    }
+
+        <a asp-controller="Products" asp-action="Index" class="btn">
+            Back to Home
+        </a>
+
+
+    </div>

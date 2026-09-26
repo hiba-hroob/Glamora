@@ -1,0 +1,27 @@
+﻿@model Webproject.Models.User
+
+@{
+    ViewData["Title"] = "My Profile";
+}
+
+<div class="main-page">
+    <div class="box">
+        <h3 class="title">My Account</h3>
+
+        <div class="profile-details">
+            <p><strong>Name:</strong> @Model.FullName</p>
+            <p><strong>Email:</strong> @Model.Email</p>
+        </div>
+
+        <a asp-action="ChangePassword" class="btn">
+            Change Password
+        </a>
+
+        <form asp-action="Logout" method="post" style="margin-top: 10px;">
+            <button type="submit" class="btn" style="background-color: #d90429;">
+                Logout
+            </button>
+        </form>
+
+    </div>
+</div>

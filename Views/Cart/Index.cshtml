@@ -1,0 +1,227 @@
+﻿@model List<Webproject.Models.CartItem>
+
+@{
+    ViewData["Title"] = "Shopping Cart";
+}
+
+<style>
+    body {
+        background-color: #fffafb;
+        font-family: sans-serif;
+    }
+
+    .cart-container {
+        max-width: 1000px;
+        margin: 40px auto;
+        padding: 0 20px;
+    }
+
+    .cart-title {
+        color: #b83b5e;
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    .cart-item {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        background: white;
+        border: 1px solid #f7d6e0;
+        border-radius: 12px;
+        padding: 15px;
+        margin-bottom: 15px;
+    }
+
+        .cart-item img {
+            width: 90px;
+            height: 90px;
+            object-fit: contain;
+        }
+
+    .cart-info {
+        flex-grow: 1;
+    }
+
+        .cart-info h4 {
+            margin: 0 0 5px;
+            color: #333;
+        }
+
+        .cart-info p {
+            margin: 4px 0;
+            color: #6c757d;
+        }
+
+    .cart-quantity {
+        font-weight: bold;
+        color: #b83b5e;
+    }
+
+    .cart-total {
+        text-align: right;
+        margin-top: 25px;
+        font-size: 20px;
+        font-weight: bold;
+        color: #333;
+    }
+
+    .cart-buttons {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 25px;
+    }
+
+    .cart-btn {
+        background-color: #b83b5e;
+        color: white;
+        border: none;
+        padding: 10px 25px;
+        border-radius: 25px;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+        .cart-btn:hover {
+            opacity: 0.9;
+            color: white;
+        }
+
+    .empty-cart {
+        text-align: center;
+        background: white;
+        border: 1px solid #f7d6e0;
+        border-radius: 12px;
+        padding: 40px;
+        color: #6c757d;
+    }
+</style>
+
+<div class="cart-container">
+
+    <h2 class="cart-title">Shopping Cart</h2>
+
+    @if (Model == null || Model.Count == 0)
+    {
+        <div class="empty-cart">
+            <h4>Your cart is empty.</h4>
+
+            <a asp-controller="Products"
+               asp-action="Index"
+               class="cart-btn">
+                Continue Shopping
+            </a>
+        </div>
+    }
+    else
+    {
+        decimal grandTotal = 0;
+
+        foreach (var item in Model)
+        {
+            grandTotal += item.Total;
+
+            <div class="cart-item">
+
+                <img src="@(string.IsNullOrEmpty(item.ImageUrl) ? "/images/default.jpg" : item.ImageUrl)"
+                     alt="@item.ProductName" />
+
+                <div class="cart-info">
+                    <h4>@item.ProductName</h4>
+
+                    <p>@item.Brand</p>
+
+                    <p>Price: $@item.Price</p>
+
+                    <div class="cart-quantity">
+
+                        <form asp-controller="Cart"
+                              asp-action="DecreaseQuantity"
+                              method="post"
+                              style="display: inline;">
+
+                            <input type="hidden"
+                                   name="productId"
+                                   value="@item.ProductId" />
+
+                            <button type="submit"
+                                    style="border: none; background: #f7d6e0; border-radius: 50%; width: 30px; height: 30px; cursor: pointer;">
+                                −
+                            </button>
+
+                        </form>
+
+                        <span style="margin: 0 12px;">
+                            @item.Quantity
+                        </span>
+
+                        <form asp-controller="Cart"
+                              asp-action="IncreaseQuantity"
+                              method="post"
+                              style="display: inline;">
+
+                            <input type="hidden"
+                                   name="productId"
+                                   value="@item.ProductId" />
+
+                            <button type="submit"
+                                    style="border: none; background: #f7d6e0; border-radius: 50%; width: 30px; height: 30px; cursor: pointer;">
+                                +
+                            </button>
+
+                        </form>
+
+                    </div>
+
+
+                </div>
+
+                <div>
+                    <strong>$@item.Total</strong>
+
+                    <form asp-controller="Cart"
+                          asp-action="RemoveFromCart"
+                          method="post"
+                          style="margin-top: 10px;">
+
+                        <input type="hidden"
+                               name="productId"
+                               value="@item.ProductId" />
+
+                        <button type="submit"
+                                style="border: none; background:#d90429; color: white; cursor: pointer;">
+                            Remove
+                        </button>
+
+                    </form>
+                </div>
+
+            </div>
+        }
+
+        <div class="cart-total">
+            Total: $@grandTotal
+        </div>
+
+        <div class="cart-buttons">
+
+            <a asp-controller="Products"
+               asp-action="Index"
+               class="cart-btn">
+                Continue Shopping
+            </a>
+
+            <form asp-controller="Orders"
+                  asp-action="ConfirmOrder"
+                  method="post">
+
+                <button type="submit" class="cart-btn">
+                    Confirm Order
+                </button>
+
+            </form>
+
+        </div>
+    }
+
+</div>

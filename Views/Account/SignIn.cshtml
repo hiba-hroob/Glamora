@@ -1,0 +1,38 @@
+﻿@model Webproject.Models.User
+
+@{
+    ViewData["Title"] = "Sign In";
+}
+
+<div class="main-page">
+    <div class="box">
+        <h3 class="title">Sign In</h3>
+
+        @if (ViewBag.Error != null)
+        {
+            <div class="error">
+                @ViewBag.Error
+            </div>
+        }
+
+        <form asp-action="SignIn" method="post">
+            <div class="field">
+                <label class="label">Email</label>
+                <input type="email" asp-for="Email" class="input" required placeholder="example@mail.com" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+
+            <div class="field">
+                <label class="label">Password</label>
+                <input type="password" asp-for="Password" class="input" required placeholder="********" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+
+            <button type="submit" class="btn">Login</button>
+        </form>
+
+        <div class="footer">
+            Don't have an account? <a asp-action="SignUp">Register</a>
+        </div>
+    </div>
+</div>

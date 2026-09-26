@@ -1,0 +1,28 @@
+﻿@model List<Webproject.Models.OrderDetail>
+
+<h2>🛍️ Order Details</h2>
+
+@if (Model != null && Model.Any())
+{
+    @foreach (var item in Model)
+    {
+        <div style="display:flex; gap:10px; margin-bottom:10px; background:white; padding:10px; border-radius:10px;">
+            <img src="@item.Product.ImageUrl" width="70" alt="@item.Product.Name" />
+            <div>
+                <h4>@item.Product.Name</h4>
+                <p style="color:#b83b5e;">$@item.Price</p>
+            </div>
+        </div>
+    }
+}
+else
+{
+    <p>No details found for this order.</p>
+}
+
+<div style="text-align:center; margin-top:30px;">
+    <a asp-action="MyOrders" asp-controller="Orders"
+       style="background:#b83b5e; color:white; padding:10px 18px; border-radius:12px; text-decoration:none; font-weight:bold;">
+        Back to Orders
+    </a>
+</div>

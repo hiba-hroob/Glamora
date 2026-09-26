@@ -1,0 +1,198 @@
+﻿@model Webproject.Models.ProductIndexViewModel
+
+@{
+    ViewData["Title"] = "Glamora";
+}
+
+
+<style>
+    body {
+        background-color: #fffafb;
+        font-family: sans-serif;
+    }
+
+    .shop-logo {
+        font-family: "Nosifer", sans-serif;
+        color: #b83b5e;
+        font-size: 40px;
+        text-transform: uppercase;
+        margin: 0;
+    }
+    .shop-controls {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 20px 0;
+    }
+
+    .search-input {
+        border: 1px solid #f7d6e0;
+        border-radius: 20px;
+        padding: 5px 15px;
+    }
+
+    .search-btn {
+        background-color: #b83b5e;
+        color: white;
+        border: none;
+        border-radius: 20px;
+        padding: 5px 20px;
+        cursor: pointer;
+    }
+
+    .btn-confirm-order {
+        background-color: #b83b5e;
+        color: white;
+        border: none;
+        padding: 10px 30px;
+        border-radius: 25px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    .brand-divider {
+        border-top: 2px solid #f9d5e5;
+        margin: 40px 0;
+        text-align: center;
+        position: relative;
+    }
+
+    .brand-title {
+        background: #fffafb;
+        padding: 0 15px;
+        position: relative;
+        top: -12px;
+        color: #b83b5e;
+        font-weight: bold;
+    }
+
+   
+    .products-grid {
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+        gap: 20px;
+    }
+    .product-card {
+        display: flex;
+        flex-direction: column;
+        border: 1px solid #f7d6e0;
+        border-radius: 12px;
+        padding: 15px;
+        background: white;
+        text-align: center;
+        transition: transform 0.2s, box-shadow 0.2s;
+        height: 100%;
+    }
+   
+    .card-content {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+    }
+
+    .product-card:hover {
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+
+    .product-img {
+        width: 100%;
+        height: 130px;
+        object-fit: contain;
+        display: block;
+        margin-bottom: 10px;
+    }
+
+    .buy-btn {
+        background: #b83b5e;
+        color: white;
+        border: none;
+        border-radius: 20px;
+        width: 100%;
+        padding: 8px;
+        cursor: pointer;
+        transition: 0.2s;
+    }
+
+    .card-content form {
+        margin-top: auto;
+    }
+
+        .buy-btn:hover {
+            background: #a52f50;
+            transform: translateY(-1px);
+        }
+
+    .product-description {
+        font-size: 10px;
+        color: #6c757d;
+        margin: 3px 0;
+        max-height: 0;
+        opacity: 0;
+        overflow: hidden;
+        transition: 0.3s;
+    }
+
+    .product-card:hover .product-description {
+        overflow: visible;
+        max-height: 50px;
+        opacity: 1;
+    }
+</style>
+
+<div style="text-align: center; margin-top: 25px; margin-bottom: 25px;">
+    <h1 class="shop-logo">GLAMORA SHOP</h1>
+</div>
+
+<div style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
+    <div class="shop-controls">
+        <h2 style="color: #6c757d;">Products</h2>
+        <form method="get" asp-action="Index">
+            <input type="text" name="searchString" value="@Model.SearchString" placeholder="Search..." class="search-input" />
+            <button type="submit" class="search-btn">Search</button>
+        </form>
+    </div>
+    <div style="text-align: right; margin-bottom: 20px;">
+        <a asp-controller="Cart"
+           asp-action="Index"
+           class="btn-confirm-order"
+           style="text-decoration: none; display: inline-block; color: white">
+            🛒 Shopping Cart
+        </a>
+    </div>
+
+    @foreach (var brandGroup in Model.GroupedProducts)
+    {
+        <div class="brand-divider">
+            <span class="brand-title">@brandGroup.Key</span>
+        </div>
+
+        <div class="products-grid">
+            @foreach (var product in brandGroup.Value)
+            {
+                <div class="product-card">
+                    <img src="@(string.IsNullOrEmpty(product.ImageUrl) ? "/images/default.jpg" : product.ImageUrl)" alt="@product.Name" class="product-img">
+    
+                    <div class="card-content">
+                        <h6 style="margin: 10px 0;">@product.Name</h6>
+                        <p style="font-weight: bold; margin-bottom: 10px;">$@product.Price</p>
+                        <p class="product-description">@product.Description</p>
+
+                        <form asp-controller="Cart"
+                              asp-action="AddToCart"
+                              method="post">
+
+                            <input type="hidden" name="productId" value="@product.Id" />
+
+                            <button type="submit" class="buy-btn">
+                                Add to Cart
+                            </button>
+
+                        </form>
+
+                    </div>
+                </div>
+            }
+        </div>
+    }
+  
+</div>
