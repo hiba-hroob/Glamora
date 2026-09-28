@@ -16,7 +16,14 @@ namespace Webproject.Controllers
         [HttpGet]
         public IActionResult SignIn()
         {
-            return View();
+            var model = new User();
+
+            if (TempData["RegisteredEmail"] != null)
+            {
+                model.Email = TempData["RegisteredEmail"].ToString();
+            }
+
+            return View(model);
         }
 
         [HttpPost]
@@ -48,6 +55,7 @@ namespace Webproject.Controllers
             if (ModelState.IsValid)
             {
                 var exists = _context.Users.Any(u => u.Email == user.Email);
+
                 if (exists)
                 {
                     ViewBag.Error = "This email is already registered.";
@@ -56,6 +64,8 @@ namespace Webproject.Controllers
 
                 _context.Users.Add(user);
                 _context.SaveChanges();
+
+                TempData["RegisteredEmail"] = user.Email;
 
                 return RedirectToAction("SignIn");
             }
