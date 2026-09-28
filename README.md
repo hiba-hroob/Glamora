@@ -2,7 +2,8 @@
 
 ## 📦 Download Project
 
-[⬇️ Download Glamora Project](https://github.com/hiba-hroob/Glamora/releases/tag/v1.0.0)
+[⬇️ Download Glamora Project](https://github.com/hiba-hroob/Glamora/releases/download/v1.0.0/Glamora.zip)
+
 
 The complete project files are available in the release as a ZIP file.
 
