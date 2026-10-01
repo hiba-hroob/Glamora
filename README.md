@@ -22,3 +22,7 @@ The project combines creativity and technology to create a complete web experien
 
 A project built with teamwork, creativity, and a lot of learning.
 
+**✦ Project Demo**
+
+Watch AUREVA in action:
+**https://youtu.be/_P_vyFHWdwc?si=BPaNeS6Bbho0b87S**
