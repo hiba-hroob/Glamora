@@ -28,5 +28,7 @@ Watch AUREVA in action:
 
 **https://youtu.be/_P_vyFHWdwc?si=BPaNeS6Bbho0b87S**
 
+
+
 **Project Screenshots ✅**
 **https://www.linkedin.com/posts/hiba-hroob-6312533ab_glamora-fullstack-webdevelopment-activity-7510362345202950144-aD0A?utm_source=share&utm_medium=member_desktop&rcm=ACoAAGQ89MUBQd0BvG1Pdk5l7DYOoDOMwXM-P0E**
