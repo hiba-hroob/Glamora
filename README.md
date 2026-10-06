@@ -87,4 +87,4 @@ The complete project files are also available in the GitHub release.
 
 ---
 
-Built with teamwork, creativity, and a lot of learning. 💗
+Built with teamwork, creativity, and a lot of learning. 
