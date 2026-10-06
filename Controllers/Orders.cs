@@ -133,62 +133,65 @@ namespace Webproject.Controllers
             return View();
         }
 
-        public IActionResult Details(int id)
-        {
-            var userId = HttpContext.Session.GetInt32("UserId");
 
-            if (userId == null)
-            {
-                return RedirectToAction("SignIn", "Account");
-            }
+public IActionResult Details(int id)
+{
+    var userId = HttpContext.Session.GetInt32("UserId");
 
-            var order = _context.Orders
-                .FirstOrDefault(o => o.Id == id && o.UserId == userId.Value);
+    if (userId == null)
+    {
+        return RedirectToAction("SignIn", "Account");
+    }
 
-            if (order == null)
-            {
-                return NotFound();
-            }
+    var order = _context.Orders
+        .FirstOrDefault(o => o.Id == id && o.UserId == userId.Value);
 
-            var orderDetails = _context.OrderDetails
-                .Include(od => od.Product)
-                .Where(od => od.OrderId == id)
-                .ToList();
+    if (order == null)
+    {
+        return RedirectToAction("MyOrders");
+    }
 
-            return View(orderDetails);
-        }
+    var orderDetails = _context.OrderDetails
+        .Include(od => od.Product)
+        .Where(od => od.OrderId == id)
+        .ToList();
+
+    return View(orderDetails);
+}
 
 
-        [HttpPost]
-        public IActionResult DeleteOrder(int id)
-        {
-            var userId = HttpContext.Session.GetInt32("UserId");
 
-            if (userId == null)
-            {
-                return RedirectToAction("SignIn", "Account");
-            }
+[HttpPost]
+public IActionResult DeleteOrder(int id)
+{
+    var userId = HttpContext.Session.GetInt32("UserId");
 
-            var order = _context.Orders
-                .FirstOrDefault(o => o.Id == id && o.UserId == userId.Value);
+    if (userId == null)
+    {
+        return RedirectToAction("SignIn", "Account");
+    }
 
-            if (order == null)
-            {
-                return NotFound();
-            }
+    var order = _context.Orders
+        .FirstOrDefault(o => o.Id == id && o.UserId == userId.Value);
 
-            var orderDetails = _context.OrderDetails
-                .Where(od => od.OrderId == id)
-                .ToList();
+    if (order == null)
+    {
+        return RedirectToAction("MyOrders");
+    }
 
-            _context.OrderDetails.RemoveRange(orderDetails);
+    var orderDetails = _context.OrderDetails
+        .Where(od => od.OrderId == id)
+        .ToList();
 
-            _context.Orders.Remove(order);
+    _context.OrderDetails.RemoveRange(orderDetails);
+    _context.Orders.Remove(order);
 
-            _context.SaveChanges();
+    _context.SaveChanges();
 
-            return RedirectToAction("MyOrders");
-        }
+    return RedirectToAction("MyOrders");
+}
+
+
 
     }
        

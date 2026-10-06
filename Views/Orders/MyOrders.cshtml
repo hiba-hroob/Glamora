@@ -84,18 +84,16 @@
                 back
             </a>
 
-            <form asp-controller="Orders"
-                  asp-action="DeleteOrder"
-                  asp-route-id="@order.Id"
-                  method="post"
-                  style="display:inline;">
-
-                <button type="submit" class="btn-details">
-                    Delete
-                </button>
-
-            </form>
-
+<form asp-controller="Orders"
+      asp-action="DeleteOrder"
+      asp-route-id="@order.Id"
+      method="post"
+      style="display:inline;"
+      onsubmit="this.querySelector('button').disabled = true;">
+    <button type="submit" class="btn-details">
+        Delete
+    </button>
+</form>
 
 
         </div>
