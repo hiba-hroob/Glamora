@@ -37,20 +37,18 @@
         }
     }
 
-    /* Mobile */
     @@media (max-width: 767px) {
-        .video-hero {
-            height: auto;
-            min-height: 0;
-            aspect-ratio: 16 / 9;
-            border-radius: 10px;
-        }
-
-        .video-hero video {
-            transform: scale(1.06);
-            object-position: center;
-        }
+    .video-hero video {
+        transform: scale(1.18);
+        object-position: center center;
     }
+}
+
+@@media (max-width: 480px) {
+    .video-hero video {
+        transform: scale(1.25);
+    }
+}
 
     /* Small phones */
     @@media (max-width: 480px) {
