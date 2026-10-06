@@ -50,7 +50,7 @@ namespace Webproject.Controllers
             var order = new Order
             {
                 UserId = userId.Value,
-                OrderDate = DateTime.Now,
+                OrderDate = DateTime.UtcNow,
                 TotalPrice = cart.Sum(x => x.Price * x.Quantity)
             };
 
