@@ -31,24 +31,17 @@
             min-height: 360px;
             border-radius: 12px;
         }
+    }
 
-        .video-hero video {
-            transform: scale(1.03);
+    /* Mobile */
+    @@media (max-width: 767px) {
+        .video-hero {
+            height: auto;
+            min-height: 0;
+            aspect-ratio: 16 / 9;
+            border-radius: 10px;
         }
     }
-
-    @@media (max-width: 767px) {
-    .video-hero video {
-        transform: scale(1.18);
-        object-position: center center;
-    }
-}
-
-@@media (max-width: 480px) {
-    .video-hero video {
-        transform: scale(1.25);
-    }
-}
 
     /* Small phones */
     @@media (max-width: 480px) {
@@ -56,17 +49,13 @@
             aspect-ratio: 16 / 9;
             border-radius: 8px;
         }
-
-        .video-hero video {
-            transform: scale(1.09);
-        }
     }
 </style>
 
 <div class="text-center">
     <div class="video-hero">
         <video autoplay muted loop playsinline preload="metadata">
-            <source src="/imgs/trailer (2).mp4" type="video/mp4">
+            <source src="/imgs/trailer-cropped.mp4" type="video/mp4">
             Your browser does not support the video tag.
         </video>
     </div>
