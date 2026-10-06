@@ -1,32 +1,75 @@
-﻿@{
+@{
     ViewData["Title"] = "Home Page";
 }
 
 <style>
-    
-.video-hero {
-    width: 100%;
-    height: 70vh; 
-    border-radius: 15px;
-    overflow: hidden;
-    position: relative;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-}
+    .video-hero {
+        width: 100%;
+        height: 70vh;
+        min-height: 420px;
+        border-radius: 15px;
+        overflow: hidden;
+        position: relative;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        background: #000;
+    }
 
     .video-hero video {
+        position: absolute;
+        inset: 0;
         width: 100%;
         height: 100%;
-        object-fit: cover; 
+        display: block;
+        object-fit: cover;
+        object-position: center;
+    }
+
+    /* Tablet / iPad */
+    @@media (max-width: 991px) {
+        .video-hero {
+            height: 60vh;
+            min-height: 360px;
+            border-radius: 12px;
+        }
+
+        .video-hero video {
+            transform: scale(1.03);
+        }
+    }
+
+    /* Mobile */
+    @@media (max-width: 767px) {
+        .video-hero {
+            height: auto;
+            min-height: 0;
+            aspect-ratio: 16 / 9;
+            border-radius: 10px;
+        }
+
+        .video-hero video {
+            transform: scale(1.06);
+            object-position: center;
+        }
+    }
+
+    /* Small phones */
+    @@media (max-width: 480px) {
+        .video-hero {
+            aspect-ratio: 16 / 9;
+            border-radius: 8px;
+        }
+
+        .video-hero video {
+            transform: scale(1.09);
+        }
     }
 </style>
 
 <div class="text-center">
     <div class="video-hero">
-        <video autoplay muted loop playsinline>
+        <video autoplay muted loop playsinline preload="metadata">
             <source src="/imgs/trailer (2).mp4" type="video/mp4">
             Your browser does not support the video tag.
         </video>
     </div>
-
-   
 </div>
