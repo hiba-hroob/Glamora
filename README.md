@@ -88,3 +88,8 @@ The complete project files are also available through the GitHub release.
 ---
 
 Built with teamwork, creativity, and a lot of learning. 
+
+## 🧪 Demo Notice
+
+**All live links provided below are for demonstration purposes only.** These are demo versions intended to showcase the projects' features and functionality.
+
